@@ -1,20 +1,6 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,15 +10,106 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.sequencer-container {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sequencer {
+  width: 90%;
+  overflow-x: auto;
+}
+
+.sequencer-options {
+  width: 60%;
+  text-align: left;
+  padding-bottom: 0.6em;
+  display: flex;
+  justify-content: left;
+}
+
+.sequencer-width-opt {
+  font-size: 4em;
+  opacity: 0.25;
+  transition: all 200ms;
+}
+
+.sequencer-width-opt:hover {
+  opacity: 0.35;
+}
+
+.btn {
+  padding: 0.8em;
+  margin-right: 0.4em;
+  border-radius: 0.4em;
+  font-size: 0.7em;
+  font-weight: bold;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.clear-btn {
+  background-color: #81bdee;
+  font-weight: normal;
+  margin-left: 0.4em;
+  vertical-align: middle;
+  opacity: 0.85;
+  transition: all 200ms;
+}
+
+.start-btn {
+  opacity: 0.85;
+  transition: all 200ms;
+}
+
+.clear-btn:hover, .start-btn:hover {
+  opacity: 1;
+}
+
+.clear-btn > span, .start-btn > span {
+  vertical-align: middle;
+}
+
+.vel-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #c96615BB;
+  padding: 0 0.3em;
+  border-radius: 0.2em;
+}
+
+.vel-label {
+  padding: 0;
+  margin: 0;
+  font-size: 0.7em;
+  color: white;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+}
+
+.vel-btn-container {
+  display: flex;
+  align-items: center;
+}
+
+.vel-btn {
+  color: #c9c8c7;
+  background-color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 1em;
+  margin-left: 0.3em;
+  font-weight: bold;
+  outline: none;
+  border: none;
+}
+
+.circle-btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: none;
 }
