@@ -61,6 +61,7 @@ function Sequencer() {
     currWidth,
     handlePatternChange,
     cleanPattern,
+    sharePattern,
     incrementWidth,
     decrementWidth,
   } = usePattern(initialPattern);
@@ -177,6 +178,11 @@ function Sequencer() {
           <span class="material-icons">delete</span>
           <span>Limpar</span>
         </button>
+
+        <button class="btn clear-btn" onClick={() => sharePattern()}>
+          <span class="material-icons">share</span>
+          <span>Compartilhar</span>
+        </button>
       </div>
 
       <div className="sequencer-container">
@@ -189,7 +195,9 @@ function Sequencer() {
                     <td>
                       <Note
                         key={x}
-                        onClick={() => handlePatternChange({ x, y, value })}
+                        onClick={() => {
+                          handlePatternChange({ x, y, value })
+                        }}
                         selected={value}
                         active={activeColumn == y}
                         color={NOTES_METADATA[NOTES[x]]["color"]}
