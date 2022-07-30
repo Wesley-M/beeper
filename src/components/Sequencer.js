@@ -114,13 +114,13 @@ function Sequencer() {
           synth.getSynth("synth").triggerAttackRelease(synth_chord, "8n", time);
           synth
             .getSynth("membrane")
-            .triggerAttackRelease(membrane_chord, "8n", time);
+            .triggerAttackRelease(membrane_chord, "4n", time);
           synth
             .getSynth("metal")
             .triggerAttackRelease(metal_chord, "16n", time);
 
           sequencerRef.current.scrollLeft =
-            col * WIDTH * Math.log((velocity + 11) / 2);
+            col * 40;
         },
         Array.from(Array(currWidth).keys()),
         Math.floor(velocity) + "n"
@@ -140,51 +140,6 @@ function Sequencer() {
 
   return (
     <div className="App">
-      <div className="sequencer-options">
-        <button
-          className="btn start-btn"
-          style={{
-            backgroundColor: playState == "started" ? "#f0264bCC" : "#31a03cCC",
-          }}
-          onClick={() => toggle()}
-        >
-          {playState == "started" ? (
-            <span class="material-icons">stop</span>
-          ) : (
-            <span class="material-icons">play_arrow</span>
-          )}
-          {playState == "started" ? "Parar" : "Começar"}
-        </button>
-
-        <div className="vel-container">
-          <p className="vel-label">Velocidade</p>
-          <div className="vel-btn-container">
-            {VEL_FACTORS.map((factor) => (
-              <button
-                className="vel-btn"
-                style={{
-                  backgroundColor: isVelSelected(factor) ? "#b35508" : "white",
-                  color: isVelSelected(factor) ? "white" : "#b35508",
-                }}
-                onClick={() => toggleVelocity(factor)}
-              >
-                x{factor}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <button class="btn clear-btn" onClick={() => cleanPattern()}>
-          <span class="material-icons">delete</span>
-          <span>Limpar</span>
-        </button>
-
-        <button class="btn clear-btn" onClick={() => sharePattern()}>
-          <span class="material-icons">share</span>
-          <span>Compartilhar</span>
-        </button>
-      </div>
-
       <div className="sequencer-container">
         <div className="sequencer" ref={sequencerRef}>
           <table>
@@ -196,7 +151,9 @@ function Sequencer() {
                       <Note
                         key={x}
                         onClick={() => {
-                          handlePatternChange({ x, y, value })
+                          handlePatternChange({ x, y, value });
+                          let currSynth = NOTES_METADATA[NOTES[x]]["synth"];
+                          synth.getSynth(currSynth).triggerAttackRelease(NOTES[x], "8n");
                         }}
                         selected={value}
                         active={activeColumn == y}
@@ -221,6 +178,50 @@ function Sequencer() {
             </span>
           </button>
         </div>
+      </div>
+
+      <div className="sequencer-options">
+        <button
+          className="btn start-btn"
+          style={{
+            backgroundColor: playState == "started" ? "#f0264bCC" : "#1a73e7cc",
+          }}
+          onClick={() => toggle()}
+        >
+          {playState == "started" ? (
+            <span class="material-icons">stop</span>
+          ) : (
+            <span class="material-icons">play_arrow</span>
+          )}
+        </button>
+
+        <div className="vel-container">
+          <p className="vel-label">Velocidade</p>
+          <div className="vel-btn-container">
+            {VEL_FACTORS.map((factor) => (
+              <button
+                className="vel-btn"
+                style={{
+                  backgroundColor: isVelSelected(factor) ? "#1a73e7cc" : "white",
+                  color: isVelSelected(factor) ? "white" : "#1a73e7cc",
+                }}
+                onClick={() => toggleVelocity(factor)}
+              >
+                x{factor}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button class="btn clear-btn" onClick={() => cleanPattern()}>
+          <span class="material-icons" style={{ padding: '0 0.2em' }}>delete</span>
+          <span>Limpar</span>
+        </button>
+
+        <button class="btn share-btn" onClick={() => sharePattern()}>
+          <span class="material-icons" style={{ padding: '0 0.2em' }}>share</span>
+          <span>Compartilhar</span>
+        </button>
       </div>
     </div>
   );

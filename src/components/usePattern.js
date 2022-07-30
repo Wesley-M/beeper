@@ -55,7 +55,7 @@ export function usePattern(initialPattern) {
     const final_url = `${current_url}?music=${compressed_cells}`;
 
     Popup.fire({
-      title: 'Compartilhe o link',
+      title: 'Compartilhe a sua obra',
       html: `<input id="swal-input1" class="swal2-input" value=${final_url} disabled/>`,
       confirmButtonText: 'Copiar',
       confirmButtonColor: '#3085d6',

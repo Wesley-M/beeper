@@ -1,5 +1,10 @@
+// Note Width
+export const NOTE_WD = 2.5;
+
 // Default width cells
-export const WIDTH = 16;
+export const WIDTH = Math.floor(
+  Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) / (NOTE_WD * 16 + 4)
+);
 
 // Factor in which the width changes
 export const WIDTH_INCREMENT_FACTOR = 10;
@@ -41,12 +46,12 @@ export const NOTES_METADATA = {
     color: "#d61bf7",
   },
   "F#4": {
-    synth: "membrane",
-    color: "#83d2fc",
+    synth: "synth",
+    color: "#b517d1",
   },
   "G#4": {
-    synth: "membrane",
-    color: "#72ccfc",
+    synth: "synth",
+    color: "#9a12b3",
   },
   "A#4": {
     synth: "membrane",

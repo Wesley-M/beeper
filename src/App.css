@@ -11,7 +11,7 @@
 }
 
 .sequencer-container {
-  width: 60%;
+  width: 95%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -23,21 +23,23 @@
 }
 
 .sequencer-options {
-  width: 60%;
+  width: 95%;
   text-align: left;
-  padding-bottom: 0.6em;
+  padding-top: 0.6em;
   display: flex;
   justify-content: left;
+  align-items: center;
 }
 
 .sequencer-width-opt {
   font-size: 4em;
-  opacity: 0.25;
+  color: #1a73e7cc;
+  opacity: 0.35;
   transition: all 200ms;
 }
 
 .sequencer-width-opt:hover {
-  opacity: 0.35;
+  opacity: 0.55;
 }
 
 .btn {
@@ -51,25 +53,40 @@
   cursor: pointer;
 }
 
-.clear-btn {
-  background-color: #81bdee;
+.clear-btn, .share-btn {
+  background-color: white;
+  border: 2px solid #f0264bDD;
+  color: #f0264bDD;
   font-weight: normal;
-  margin-left: 0.4em;
+  margin-right: 1.5em;
   vertical-align: middle;
   opacity: 0.85;
   transition: all 200ms;
+  height: 3em;
+}
+
+.share-btn { 
+  color: #1a73e7cc;
+  border: 2px solid #1a73e7cc;
 }
 
 .start-btn {
   opacity: 0.85;
+  border-radius: 2em;
   transition: all 200ms;
+  width: 4em;
+  height: 4em;
 }
 
-.clear-btn:hover, .start-btn:hover {
+.start-btn .material-icons{
+  font-size: 2em;
+}
+
+.clear-btn:hover, .share-btn, .start-btn:hover {
   opacity: 1;
 }
 
-.clear-btn > span, .start-btn > span {
+.clear-btn > span, .share-btn > span, .start-btn > span {
   vertical-align: middle;
 }
 
@@ -77,16 +94,19 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #c96615BB;
+  background-color: transparent;
   padding: 0 0.3em;
   border-radius: 0.2em;
+  border: 2px solid #1a73e7cc;
+  margin: 0 1em;
+  height: 2em;
 }
 
 .vel-label {
   padding: 0;
   margin: 0;
   font-size: 0.7em;
-  color: white;
+  color: #1a73e7cc;
   margin-right: 0.5em;
   margin-left: 0.5em;
 }
@@ -97,7 +117,6 @@
 }
 
 .vel-btn {
-  color: #c9c8c7;
   background-color: white;
   padding: 0.2em 0.5em;
   border-radius: 1em;
