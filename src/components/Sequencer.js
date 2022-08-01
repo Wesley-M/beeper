@@ -11,6 +11,10 @@ import {
 } from "../settings";
 import { Note } from "./Note";
 import { usePattern } from "./usePattern";
+import {Button, Stack} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ShareIcon from "@mui/icons-material/Share";
+import {SpeedSelector} from "./SpeedSelector";
 
 /**
  * A synthesizer wrapper
@@ -52,13 +56,12 @@ function Sequencer() {
   // The active column at the moment
   const [activeColumn, setColumn] = useState(0);
 
-  // The velocity in which the active column changes
-  const [velocity, setVelocity] = useState(DEFAULT_VEL);
-
   const {
     pattern,
     setPattern,
     currWidth,
+    speed,
+    setSpeed,
     handlePatternChange,
     cleanPattern,
     sharePattern,
@@ -68,16 +71,6 @@ function Sequencer() {
 
   // Reference to the div that contains the table
   const sequencerRef = useRef(null);
-
-  // Changes the velocity based on a factor
-  const toggleVelocity = (factor = 1) => {
-    setVelocity(DEFAULT_VEL * factor);
-  };
-
-  // Checks if velocity is selected
-  const isVelSelected = (vel) => {
-    return DEFAULT_VEL * vel == velocity;
-  };
 
   // Runs the sequencer
   useEffect(
@@ -119,16 +112,15 @@ function Sequencer() {
             .getSynth("metal")
             .triggerAttackRelease(metal_chord, "16n", time);
 
-          sequencerRef.current.scrollLeft =
-            col * 40;
+          sequencerRef.current.scrollLeft = col * 32;
         },
         Array.from(Array(currWidth).keys()),
-        Math.floor(velocity) + "n"
+        Math.floor(speed) + "n"
       ).start(0);
 
       return () => loop.dispose();
     },
-    [pattern, velocity, currWidth] // Retrigger when pattern changes
+    [pattern, speed, currWidth] // Retrigger when pattern changes
   );
 
   // Toggle playing / stopped
@@ -139,91 +131,98 @@ function Sequencer() {
   }, []);
 
   return (
-    <div className="App">
-      <div className="sequencer-container">
-        <div className="sequencer" ref={sequencerRef}>
-          <table>
-            <tbody>
-              {pattern.map((row, x) => (
-                <tr>
-                  {row.map((value, y) => (
-                    <td>
-                      <Note
-                        key={x}
-                        onClick={() => {
-                          handlePatternChange({ x, y, value });
-                          let currSynth = NOTES_METADATA[NOTES[x]]["synth"];
-                          synth.getSynth(currSynth).triggerAttackRelease(NOTES[x], "8n");
-                        }}
-                        selected={value}
-                        active={activeColumn == y}
-                        color={NOTES_METADATA[NOTES[x]]["color"]}
-                      />
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div className="body">
+        <div className="sequencer-container">
+          <div className="sequencer" ref={sequencerRef}>
+            <table>
+              <tbody>
+                {pattern.map((row, x) => (
+                  <tr>
+                    {row.map((value, y) => (
+                      <td>
+                        <Note
+                          key={x}
+                          onClick={() => {
+                            handlePatternChange({ x, y, value });
+                            let currSynth = NOTES_METADATA[NOTES[x]]["synth"];
+                            synth
+                              .getSynth(currSynth)
+                              .triggerAttackRelease(NOTES[x], "8n");
+                          }}
+                          selected={value}
+                          active={activeColumn == y}
+                          color={NOTES_METADATA[NOTES[x]]["color"]}
+                        />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <button className="circle-btn" onClick={() => incrementWidth()}>
+              <span class="material-icons sequencer-width-opt">add_circle</span>
+            </button>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <button className="circle-btn" onClick={() => incrementWidth()}>
-            <span class="material-icons sequencer-width-opt">add_circle</span>
-          </button>
-
-          <button className="circle-btn" onClick={() => decrementWidth()}>
-            <span class="material-icons sequencer-width-opt">
-              remove_circle
-            </span>
-          </button>
-        </div>
-      </div>
-
-      <div className="sequencer-options">
-        <button
-          className="btn start-btn"
-          style={{
-            backgroundColor: playState == "started" ? "#f0264bCC" : "#1a73e7cc",
-          }}
-          onClick={() => toggle()}
-        >
-          {playState == "started" ? (
-            <span class="material-icons">stop</span>
-          ) : (
-            <span class="material-icons">play_arrow</span>
-          )}
-        </button>
-
-        <div className="vel-container">
-          <p className="vel-label">Velocidade</p>
-          <div className="vel-btn-container">
-            {VEL_FACTORS.map((factor) => (
-              <button
-                className="vel-btn"
-                style={{
-                  backgroundColor: isVelSelected(factor) ? "#1a73e7cc" : "white",
-                  color: isVelSelected(factor) ? "white" : "#1a73e7cc",
-                }}
-                onClick={() => toggleVelocity(factor)}
-              >
-                x{factor}
-              </button>
-            ))}
+            <button className="circle-btn" onClick={() => decrementWidth()}>
+              <span class="material-icons sequencer-width-opt">
+                remove_circle
+              </span>
+            </button>
           </div>
         </div>
 
-        <button class="btn clear-btn" onClick={() => cleanPattern()}>
-          <span class="material-icons" style={{ padding: '0 0.2em' }}>delete</span>
-          <span>Limpar</span>
-        </button>
+        <Stack
+            direction="row"
+            spacing={2}
+            sx={{
+              width: '95%',
+              alignItems: 'center',
+              marginTop: '1.5em'
+            }}
+        >
+          <button
+            className="btn start-btn"
+            style={{
+              backgroundColor: playState == "started" ? "#f0264bCC" : "#1a73e7cc",
+            }}
+            onClick={() => toggle()}
+          >
+            {playState == "started" ? (
+              <span class="material-icons">stop</span>
+            ) : (
+              <span class="material-icons">play_arrow</span>
+            )}
+          </button>
 
-        <button class="btn share-btn" onClick={() => sharePattern()}>
-          <span class="material-icons" style={{ padding: '0 0.2em' }}>share</span>
-          <span>Compartilhar</span>
-        </button>
+          <SpeedSelector
+              speed={speed}
+              handleSpeedChange={setSpeed}
+          />
+
+          <Button
+              variant="contained"
+              onClick={() => cleanPattern()}
+              color="error"
+              size="large"
+              startIcon={<DeleteIcon />}
+              disableElevation
+          >
+            Limpar
+          </Button>
+
+          <Button
+              variant="contained"
+              onClick={() => sharePattern()}
+              startIcon={<ShareIcon />}
+              size="large"
+              disableElevation
+          >
+            Compartilhar
+          </Button>
+        </Stack>
       </div>
-    </div>
   );
 }
 

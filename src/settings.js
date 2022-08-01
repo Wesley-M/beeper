@@ -10,10 +10,10 @@ export const WIDTH = Math.floor(
 export const WIDTH_INCREMENT_FACTOR = 10;
 
 // Maximum width cells
-export const MAX_WIDTH = 5 * WIDTH;
+export const MAX_WIDTH = 100;
 
 // Default height in cells
-export const HEIGHT = 10;
+export const HEIGHT = 16;
 
 // Default velocity in which the active column changes
 export const DEFAULT_VEL = 10;
@@ -33,6 +33,12 @@ export const NOTES = [
   "F#5",
   "C0",
   "32n",
+  "C#4",
+  "D#4",
+  "F#4",
+  "G#4",
+  "A#4",
+  "C#5",
 ];
 
 // All notes metadata (by row)

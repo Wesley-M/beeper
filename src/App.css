@@ -1,13 +1,16 @@
 .App {
   text-align: center;
-  background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.8);
   min-height: 100vh;
+  color: white;
+}
+
+.body {
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .sequencer-container {
@@ -33,7 +36,7 @@
 
 .sequencer-width-opt {
   font-size: 4em;
-  color: #1a73e7cc;
+  color: rgba(192, 192, 192, 0.8);
   opacity: 0.35;
   transition: all 200ms;
 }
@@ -72,14 +75,14 @@
 
 .start-btn {
   opacity: 0.85;
-  border-radius: 2em;
+  border-radius: 3em;
   transition: all 200ms;
-  width: 4em;
-  height: 4em;
+  width: 6em;
+  height: 6em;
 }
 
 .start-btn .material-icons{
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .clear-btn:hover, .share-btn, .start-btn:hover {
@@ -94,21 +97,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: transparent;
+  background-color: #168ad5;
   padding: 0 0.3em;
   border-radius: 0.2em;
-  border: 2px solid #1a73e7cc;
-  margin: 0 1em;
-  height: 2em;
+  border: 1px solid #1a73e7cc;
+  height: 2.5em;
 }
 
 .vel-label {
   padding: 0;
-  margin: 0;
-  font-size: 0.7em;
-  color: #1a73e7cc;
-  margin-right: 0.5em;
-  margin-left: 0.5em;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0.5em;
 }
 
 .vel-btn-container {
@@ -124,6 +124,10 @@
   font-weight: bold;
   outline: none;
   border: none;
+}
+
+.vel-btn:hover {
+  cursor: pointer;
 }
 
 .circle-btn {

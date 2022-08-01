@@ -2,7 +2,7 @@ import * as JsonURL from "json-url";
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { MAX_WIDTH, WIDTH, WIDTH_INCREMENT_FACTOR } from "../settings";
+import {DEFAULT_VEL, MAX_WIDTH, WIDTH, WIDTH_INCREMENT_FACTOR} from "../settings";
 
 /**
  * It manages the pattern and its changes
@@ -13,6 +13,9 @@ export function usePattern(initialPattern) {
 
   // The current width of the pattern board
   const [currWidth, setCurrWidth] = useState(WIDTH);
+
+  // The speed in which the pattern playing changes
+  const [speed, setSpeed] = useState(DEFAULT_VEL);
 
   // Compression algorithm
   const compression_agent = JsonURL("lzma");
@@ -26,10 +29,10 @@ export function usePattern(initialPattern) {
   };
 
   // It handles simple changes in pattern
-  const handlePatternChange = async ({ x, y, value }) => {
+  const handlePatternChange = ({ x, y, value }) => {
     const patternCopy = getPatternCopy();
     patternCopy[x][y] = +!value;
-    await setPattern(patternCopy);
+    setPattern(patternCopy);
   };
 
   // Cleans all active cells
@@ -39,7 +42,7 @@ export function usePattern(initialPattern) {
   };
 
   const sharePattern = async () => {
-    let music = {currWidth: currWidth, content: []};
+    let music = {currWidth: currWidth, content: [], speed: speed};
 
     pattern.forEach((row, x) => {
       row.forEach((cell, y) => {
@@ -82,7 +85,7 @@ export function usePattern(initialPattern) {
 
     if (music) {
       compression_agent.decompress(music).then((result) => {
-        const {currWidth, content} = result;
+        const {currWidth, content, speed} = result;
 
         const patternCopy = getPatternCopy();
         updateWidth(currWidth, patternCopy);
@@ -93,6 +96,7 @@ export function usePattern(initialPattern) {
         
         setCurrWidth(currWidth);
         setPattern(patternCopy);
+        setSpeed(speed || DEFAULT_VEL);
       });
     }
   }, []);
@@ -147,6 +151,8 @@ export function usePattern(initialPattern) {
     pattern,
     setPattern,
     currWidth,
+    speed,
+    setSpeed,
     handlePatternChange,
     cleanPattern,
     sharePattern,

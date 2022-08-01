@@ -5,13 +5,13 @@ import { NOTE_WD } from '../settings';
 export function Note({ onClick, selected, active, color }) {
   const noteStyle = {
     width: active ? `${NOTE_WD}em` : `${NOTE_WD}em`,
-    height: active ? `${NOTE_WD}em` : `${NOTE_WD}em`,
+    height: active ? `${NOTE_WD - 1}em` : `${NOTE_WD - 1}em`,
     border: "0 solid",
-    borderColor: active ? "#1a73e755" : selected ? color : "#1a73e733",
+    borderColor: active ? "rgba(255,255,255,0.7)" : selected ? color : "#00000011",
     borderWidth: active ? "3px" : "2px",
-    borderRadius: "0.3em",
-    backgroundColor: selected ? color : "transparent",
-    opacity: active && selected ? 0.7 : 1,
+    borderRadius: "0.2em",
+    backgroundColor: selected ? color : "rgba(180,180,180,0.4)",
+    opacity: active && selected ? 0.9 : 1,
     transition: "background 100ms"
   };
 
