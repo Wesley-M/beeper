@@ -1,22 +1,18 @@
+import { PlayArrow, Stop } from "@mui/icons-material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ShareIcon from "@mui/icons-material/Share";
+import { Button, IconButton, Stack } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 import "../App.css";
-import {
-  DEFAULT_VEL,
-  HEIGHT, INSTRUMENT_COLOR,
-  NOTES,
-  NOTES_METADATA,
-  VEL_FACTORS,
-  WIDTH
-} from "../settings";
-import { Note } from "./Note";
 import { usePattern } from "../hooks/usePattern";
-import {Button, IconButton, Stack} from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import ShareIcon from "@mui/icons-material/Share";
-import {SpeedSelector} from "./SpeedSelector";
-import {InstrumentSelector} from "./InstrumentSelector";
-import {Fingerprint, PlayArrow, Stop} from "@mui/icons-material";
+import {
+  INSTRUMENT_COLOR,
+  NOTES
+} from "../settings";
+import { InstrumentSelector } from "./InstrumentSelector";
+import { Note } from "./Note";
+import { SpeedSelector } from "./SpeedSelector";
 
 /**
  * A synthesizer wrapper
@@ -200,6 +196,7 @@ function Sequencer() {
 
           <InstrumentSelector
               onChange={handleInstrumentChange}
+              synth={synth}
           />
 
           <Button
