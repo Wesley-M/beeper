@@ -3,18 +3,19 @@ import * as Tone from "tone";
 import "../App.css";
 import {
   DEFAULT_VEL,
-  HEIGHT,
+  HEIGHT, INSTRUMENT_COLOR,
   NOTES,
   NOTES_METADATA,
   VEL_FACTORS,
   WIDTH
 } from "../settings";
 import { Note } from "./Note";
-import { usePattern } from "./usePattern";
+import { usePattern } from "../hooks/usePattern";
 import {Button, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from "@mui/icons-material/Share";
 import {SpeedSelector} from "./SpeedSelector";
+import {InstrumentSelector} from "./InstrumentSelector";
 
 /**
  * A synthesizer wrapper
@@ -24,6 +25,8 @@ class Synth {
     this.membrane = new Tone.PolySynth(Tone.MembraneSynth).toDestination();
     this.metal = new Tone.PolySynth(Tone.MetalSynth).toDestination();
     this.synth = new Tone.PolySynth().toDestination();
+    this.fm = new Tone.PolySynth(Tone.FMSynth).toDestination();
+    this.duo = new Tone.PolySynth(Tone.DuoSynth).toDestination();
   }
 
   getSynth(synth_str) {
@@ -32,6 +35,10 @@ class Synth {
         return this.membrane;
       case "metal":
         return this.metal;
+      case "fm":
+        return this.fm;
+      case "duo":
+        return this.duo;
       default:
         return this.synth;
     }
@@ -40,11 +47,6 @@ class Synth {
 
 // A synthesizer object
 const synth = new Synth();
-
-// Initial sequence pattern
-const initialPattern = Array.from({ length: HEIGHT }, (e) =>
-  Array(WIDTH).fill(0)
-);
 
 /**
  * The sequence board
@@ -55,6 +57,13 @@ function Sequencer() {
 
   // The active column at the moment
   const [activeColumn, setColumn] = useState(0);
+
+  // Selected instrument at the moment
+  const [instrument, setInstrument] = useState('synth');
+
+  const handleInstrumentChange = (inst) => {
+    setInstrument(inst);
+  };
 
   const {
     pattern,
@@ -67,7 +76,7 @@ function Sequencer() {
     sharePattern,
     incrementWidth,
     decrementWidth,
-  } = usePattern(initialPattern);
+  } = usePattern();
 
   // Reference to the div that contains the table
   const sequencerRef = useRef(null);
@@ -80,37 +89,23 @@ function Sequencer() {
           // Update active column for animation
           setColumn(col);
 
-          let synth_chord = [];
-          let membrane_chord = [];
-          let metal_chord = [];
+          // Mapping instrument to chord
+          let instrument_chord = {};
 
           // Loop current pattern
           pattern.map((row, noteIndex) => {
             // If active
             if (row[col]) {
-              let currSynth = NOTES_METADATA[NOTES[noteIndex]]["synth"];
-
-              switch (currSynth) {
-                case "synth":
-                  synth_chord.push(NOTES[noteIndex]);
-                  break;
-                case "membrane":
-                  membrane_chord.push(NOTES[noteIndex]);
-                  break;
-                case "metal":
-                  metal_chord.push(NOTES[noteIndex]);
-                  break;
+              if (!instrument_chord[row[col]]) {
+                instrument_chord[row[col]] = [];
               }
+              instrument_chord[row[col]].push(NOTES[noteIndex]);
             }
           });
 
-          synth.getSynth("synth").triggerAttackRelease(synth_chord, "8n", time);
-          synth
-            .getSynth("membrane")
-            .triggerAttackRelease(membrane_chord, "4n", time);
-          synth
-            .getSynth("metal")
-            .triggerAttackRelease(metal_chord, "16n", time);
+          for (let instrument in instrument_chord) {
+            synth.getSynth(instrument).triggerAttackRelease(instrument_chord[instrument], "8n", time);
+          }
 
           sequencerRef.current.scrollLeft = col * 32;
         },
@@ -143,15 +138,14 @@ function Sequencer() {
                         <Note
                           key={x}
                           onClick={() => {
-                            handlePatternChange({ x, y, value });
-                            let currSynth = NOTES_METADATA[NOTES[x]]["synth"];
+                            handlePatternChange({ x, y, instrument });
                             synth
-                              .getSynth(currSynth)
+                              .getSynth(instrument)
                               .triggerAttackRelease(NOTES[x], "8n");
                           }}
                           selected={value}
                           active={activeColumn == y}
-                          color={NOTES_METADATA[NOTES[x]]["color"]}
+                          color={INSTRUMENT_COLOR[value]}
                         />
                       </td>
                     ))}
@@ -199,6 +193,10 @@ function Sequencer() {
           <SpeedSelector
               speed={speed}
               handleSpeedChange={setSpeed}
+          />
+
+          <InstrumentSelector
+              onChange={handleInstrumentChange}
           />
 
           <Button

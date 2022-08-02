@@ -2,12 +2,17 @@ import * as JsonURL from "json-url";
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import {DEFAULT_VEL, MAX_WIDTH, WIDTH, WIDTH_INCREMENT_FACTOR} from "../settings";
+import {DEFAULT_SPEED, HEIGHT, MAX_WIDTH, WIDTH, WIDTH_INCREMENT_FACTOR} from "../settings";
+
+// Initial sequence pattern
+const initialPattern = Array.from({ length: HEIGHT }, (e) =>
+    Array(WIDTH).fill(null)
+);
 
 /**
  * It manages the pattern and its changes
  */
-export function usePattern(initialPattern) {
+export function usePattern() {
   // The current pattern
   const [pattern, setPattern] = useState(initialPattern);
 
@@ -15,7 +20,7 @@ export function usePattern(initialPattern) {
   const [currWidth, setCurrWidth] = useState(WIDTH);
 
   // The speed in which the pattern playing changes
-  const [speed, setSpeed] = useState(DEFAULT_VEL);
+  const [speed, setSpeed] = useState(DEFAULT_SPEED);
 
   // Compression algorithm
   const compression_agent = JsonURL("lzma");
@@ -29,9 +34,10 @@ export function usePattern(initialPattern) {
   };
 
   // It handles simple changes in pattern
-  const handlePatternChange = ({ x, y, value }) => {
+  const handlePatternChange = ({ x, y, instrument }) => {
     const patternCopy = getPatternCopy();
-    patternCopy[x][y] = +!value;
+    const sameInstrument = patternCopy[x][y] === instrument;
+    patternCopy[x][y] = sameInstrument ? null : instrument;
     setPattern(patternCopy);
   };
 
@@ -47,7 +53,7 @@ export function usePattern(initialPattern) {
     pattern.forEach((row, x) => {
       row.forEach((cell, y) => {
         if (cell) {
-          music.content.push([x, y]);
+          music.content.push([x, y, cell]);
         }
       });
     });
@@ -91,12 +97,12 @@ export function usePattern(initialPattern) {
         updateWidth(currWidth, patternCopy);
         
         for (let point of content) {
-          patternCopy[point[0]][point[1]] = 1;
+          patternCopy[point[0]][point[1]] = point[2];
         }
         
         setCurrWidth(currWidth);
         setPattern(patternCopy);
-        setSpeed(speed || DEFAULT_VEL);
+        setSpeed(speed || DEFAULT_SPEED);
       });
     }
   }, []);
