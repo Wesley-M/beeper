@@ -5,8 +5,8 @@ import {NOTE_HT, NOTE_WD} from '../settings';
  */
 export function Note({ onClick, selected, active, color }) {
   const noteStyle = {
-    width: active ? `${NOTE_WD}em` : `${NOTE_WD}em`,
-    height: active ? `${NOTE_HT}em` : `${NOTE_HT}em`,
+    width: `${NOTE_WD}em`,
+    height: `${NOTE_HT}em`,
     border: "0 solid",
     borderColor: active ? "rgba(255,255,255,0.7)" : selected ? color : "#00000011",
     borderWidth: active ? "3px" : "2px",

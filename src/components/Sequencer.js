@@ -11,11 +11,12 @@ import {
 } from "../settings";
 import { Note } from "./Note";
 import { usePattern } from "../hooks/usePattern";
-import {Button, Stack} from "@mui/material";
+import {Button, IconButton, Stack} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from "@mui/icons-material/Share";
 import {SpeedSelector} from "./SpeedSelector";
 import {InstrumentSelector} from "./InstrumentSelector";
+import {Fingerprint, PlayArrow, Stop} from "@mui/icons-material";
 
 /**
  * A synthesizer wrapper
@@ -167,26 +168,28 @@ function Sequencer() {
           </div>
         </div>
 
+        {/* Desktop's version of the controls */}
         <Stack
             direction="row"
             spacing={2}
             sx={{
               width: '95%',
               alignItems: 'center',
-              marginTop: '1.5em'
+              marginTop: '1.5em',
+              display: {xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex'}
             }}
         >
           <button
-            className="btn start-btn"
-            style={{
-              backgroundColor: playState == "started" ? "#f0264bCC" : "#1a73e7cc",
-            }}
-            onClick={() => toggle()}
+              className="btn start-btn"
+              style={{
+                backgroundColor: playState == "started" ? "#f0264bCC" : "#1a73e7cc",
+              }}
+              onClick={() => toggle()}
           >
             {playState == "started" ? (
-              <span class="material-icons">stop</span>
+                <span class="material-icons">stop</span>
             ) : (
-              <span class="material-icons">play_arrow</span>
+                <span class="material-icons">play_arrow</span>
             )}
           </button>
 
@@ -218,6 +221,69 @@ function Sequencer() {
               disableElevation
           >
             Compartilhar
+          </Button>
+        </Stack>
+
+        {/* Mobile's version of the controls */}
+        <Stack
+            direction={{ xs: 'column', sm: 'column', md: 'column', lg: 'row', xl: 'row'}}
+            spacing={2}
+            sx={{
+              width: '95%',
+              alignItems: 'center',
+              marginTop: '1.5em',
+              display: {xs: 'flex', sm: 'flex', md: 'flex', lg: 'none', xl: 'none'}
+            }}
+        >
+          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+            <SpeedSelector
+                speed={speed}
+                handleSpeedChange={setSpeed}
+            />
+
+            <IconButton
+                sx={{
+                  color: 'white',
+                  backgroundColor: playState == "started" ? "#f0264bCC" : "#1a73e7cc",
+                }}
+                onClick={() => toggle()}
+                size="large"
+            >
+              {playState == "started" ? (
+                  <Stop/>
+              ) : (
+                  <PlayArrow/>
+              )}
+            </IconButton>
+          </Stack>
+
+          <InstrumentSelector
+              onChange={handleInstrumentChange}
+              synth={synth}
+              fullWidth
+          />
+
+          <Button
+              variant="contained"
+              onClick={() => sharePattern()}
+              startIcon={<ShareIcon />}
+              size="large"
+              disableElevation
+              fullWidth
+          >
+            Compartilhar
+          </Button>
+
+          <Button
+              variant="contained"
+              onClick={() => cleanPattern()}
+              color="error"
+              size="large"
+              startIcon={<DeleteIcon />}
+              disableElevation
+              fullWidth
+          >
+            Limpar
           </Button>
         </Stack>
       </div>
