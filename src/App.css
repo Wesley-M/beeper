@@ -138,4 +138,7 @@
   background: none;
 }
 
-table { line-height: 0; }
+table {
+  line-height: 0;
+  border-collapse: collapse;
+}

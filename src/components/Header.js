@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import {Grid} from "@mui/material";
+import InstructionsDialog from "./Instructions";
 
 const Header = () => {
   return (
@@ -33,6 +34,8 @@ const Header = () => {
                 </Typography>
               </Grid>
             </Grid>
+
+            <InstructionsDialog/>
           </Toolbar>
         </Container>
       </AppBar>

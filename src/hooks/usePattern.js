@@ -39,6 +39,7 @@ export function usePattern() {
     const sameInstrument = patternCopy[x][y] === instrument;
     patternCopy[x][y] = sameInstrument ? null : instrument;
     setPattern(patternCopy);
+    return patternCopy[x][y];
   };
 
   // Cleans all active cells

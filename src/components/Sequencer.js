@@ -131,20 +131,21 @@ function Sequencer() {
                 {pattern.map((row, x) => (
                   <tr>
                     {row.map((value, y) => (
-                      <td>
                         <Note
                           key={x}
-                          onClick={() => {
-                            handlePatternChange({ x, y, instrument });
-                            synth
-                              .getSynth(instrument)
-                              .triggerAttackRelease(NOTES[x], "8n");
+                          onClick={(e) => {
+                            console.log(e)
+                            const inst = handlePatternChange({ x, y, instrument });
+                            if (inst) {
+                              synth
+                                  .getSynth(instrument)
+                                  .triggerAttackRelease(NOTES[x], "8n");
+                            }
                           }}
                           selected={value}
                           active={activeColumn == y}
                           color={INSTRUMENT_COLOR[value]}
                         />
-                      </td>
                     ))}
                   </tr>
                 ))}

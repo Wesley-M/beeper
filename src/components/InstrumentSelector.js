@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import {useState} from "react";
 import Button from "@mui/material/Button";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import {INSTRUMENT_COLOR} from "../settings";
+import {INSTRUMENT_COLOR, INSTRUMENT_NAME} from "../settings";
 
 export function InstrumentSelector({ onChange, synth, ...other }) {
   const instruments = Object.keys(INSTRUMENT_COLOR);
@@ -25,7 +25,7 @@ export function InstrumentSelector({ onChange, synth, ...other }) {
           disableElevation
           {...other}
       >
-        {instruments[currIntrument]}
+        {INSTRUMENT_NAME[instruments[currIntrument]]}
       </Button>
   );
 }

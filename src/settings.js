@@ -21,14 +21,14 @@ export const NOTES = [
 ];
 
 // Note Width
-export const NOTE_WD = 2.5;
+export const NOTE_WD = 2.4;
 
 // Note Height
-export const NOTE_HT = 1.5;
+export const NOTE_HT = 1.2;
 
 // Default width cells
 export const WIDTH = Math.floor(
-    Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) / (NOTE_WD * 16 + 4)
+    Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) / (NOTE_WD * 20 + 4)
 );
 
 // Default height in cells
@@ -52,4 +52,12 @@ export const INSTRUMENT_COLOR = {
   'membrane': '#20acf7',
   'fm': '#f57b17',
   'duo': '#c42222'
+}
+
+export const INSTRUMENT_NAME = {
+  'synth': 'Melódico',
+  'metal': 'Metálico',
+  'membrane': 'Beep',
+  'fm': 'Handpan',
+  'duo': 'Distorcido'
 }
