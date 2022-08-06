@@ -1,6 +1,6 @@
 import * as JsonURL from "json-url";
 import { useEffect, useState } from "react";
-import {DEFAULT_SPEED, HEIGHT, MAX_WIDTH, WIDTH, WIDTH_INCREMENT_FACTOR} from "../settings";
+import { DEFAULT_SPEED, FRONTEND_API, HEIGHT, MAX_WIDTH, WIDTH, WIDTH_INCREMENT_FACTOR } from "../settings";
 
 // Initial sequence pattern
 const initialPattern = Array.from({ length: HEIGHT }, (e) =>
@@ -41,6 +41,7 @@ export function usePattern() {
   const cleanPattern = () => {
     setPattern(initialPattern);
     setCurrWidth(WIDTH);
+    window.location.href = FRONTEND_API;
   };
 
   const getPatternURL = async () => {

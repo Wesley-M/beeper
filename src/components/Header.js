@@ -1,10 +1,10 @@
-import * as React from 'react';
+import AudiotrackIcon from '@mui/icons-material/Audiotrack';
+import {Grid, Stack} from "@mui/material";
 import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import AudiotrackIcon from '@mui/icons-material/Audiotrack';
-import {Grid} from "@mui/material";
+import * as React from 'react';
 import InstructionsDialog from "./Instructions";
 import SharePanel from "./SharePanel";
 
@@ -35,8 +35,10 @@ const Header = () => {
                 </Typography>
               </Grid>
             </Grid>
-            <SharePanel/>
-            <InstructionsDialog/>
+            <Stack direction="row" spacing={1}>
+              <SharePanel/>
+              <InstructionsDialog/>
+            </Stack>
           </Toolbar>
         </Container>
       </AppBar>

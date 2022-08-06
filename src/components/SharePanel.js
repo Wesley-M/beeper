@@ -38,15 +38,12 @@ export default function SharePanel() {
   }
 
   const songsReq = useQuery(["songs"], getSongs);
-
-  console.log(songsReq?.data);
   
   return (
     <div>
       <Button
         sx={{
           color: "white",
-          marginRight: { xs: "0", sm: "0", md: "10vw", lg: "14vw", xl: "14vw" },
           fontWeight: "bold",
           whiteSpace: "nowrap",
         }}
@@ -78,7 +75,7 @@ export default function SharePanel() {
         <Box
           sx={{
             minHeight: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
             padding: "2em 0",
           }}
         >

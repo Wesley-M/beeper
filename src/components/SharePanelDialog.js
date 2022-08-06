@@ -51,13 +51,17 @@ export default function SharePanelDialog({songURL, ...other}) {
               render({data}){
                 const {response} = data;
                 const msg = response.data.message;
-
+                
+                console.log(msg);
+                
                 if (msg.indexOf("dup key: { name") >= 0) {
                   return "Música com esse nome já existe."
                 } else if (msg.indexOf("dup key: { content") >= 0) {
                   return "Música duplicada."
                 } else if (msg.indexOf("`content` is required") >= 0) {
                   return "Música vazia."
+                } else if (msg.indexOf("`name` is required") >= 0) {
+                  return "Nome de música vazio."
                 }
               }
             }
@@ -79,7 +83,7 @@ export default function SharePanelDialog({songURL, ...other}) {
             disableElevation
             {...other}
         >
-          Salvar no quadro
+          Salvar
         </Button>
 
         <Dialog open={open} onClose={handleClose}>
