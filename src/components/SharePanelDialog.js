@@ -83,7 +83,7 @@ export default function SharePanelDialog({songURL, ...other}) {
             disableElevation
             {...other}
         >
-          Salvar
+          Publicar
         </Button>
 
         <Dialog open={open} onClose={handleClose}>
