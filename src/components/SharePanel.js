@@ -1,4 +1,6 @@
+import { Hearing } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
+import { Grid } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -12,10 +14,7 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from '@tanstack/react-query';
 import * as React from "react";
 import { useState } from "react";
-import {api, FRONTEND_API} from "../settings";
-import {Grid, Stack} from "@mui/material";
-import {Hearing, Send} from "@mui/icons-material";
-import AudiotrackIcon from "@mui/icons-material/Audiotrack";
+import { api, FRONTEND_API } from "../settings";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -116,7 +115,7 @@ export default function SharePanel() {
                             }}
                         >
                           <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
-                            <Typography>
+                            <Typography noWrap sx={{ fontSize: '1.1em' }} title={song.name}>
                               {song.name}
                             </Typography>
                           </Grid>
