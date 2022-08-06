@@ -1,8 +1,8 @@
 # Beeper
 
 Beeper is a **step sequencer** with features that make your life easier when you want
-to share simple eletronic music with your friends. Its goal is essentially to enable fast
-creation of simple tunes and sharing of both song links, as well as in a public panel.
+to share simple electronic music with your friends. Its goal is essentially to enable fast
+creation of simple tunes and sharing of song links, or publishing in a public panel.
 
 ## Manual
 

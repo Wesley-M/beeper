@@ -116,7 +116,10 @@ export default function InstructionsDialog() {
                     <ListItemIcon>
                       <MouseIcon sx={{ color: '#FFFFFFCC' }} />
                     </ListItemIcon>
-                    <ListItemText sx={{ color: '#FFFFFFCC' }} primary="Para criar suas músicas, clique ou arraste seu mouse (pressionando o botão esquerdo) nas células da grade." />
+                    <ListItemText
+                        sx={{ color: '#FFFFFFCC' }}
+                        primary="Para criar suas músicas, clique ou arraste seu mouse (pressionando o botão esquerdo) nas células da grade."
+                    />
                   </ListItemButton>
                 </ListItem>
 
@@ -125,7 +128,10 @@ export default function InstructionsDialog() {
                     <ListItemIcon>
                       <GraphicEqIcon sx={{ color: '#FFFFFFCC' }}/>
                     </ListItemIcon>
-                    <ListItemText sx={{ color: '#FFFFFFCC' }} primary="Existem diferentes sons para você experimentar! Mude o tipo clicando no botão 'Melódico' na parte inferior da tela." />
+                    <ListItemText
+                        sx={{ color: '#FFFFFFCC' }}
+                        primary="Existem diferentes sons para você experimentar! Mude o tipo clicando no botão 'Melódico' na parte inferior da tela."
+                    />
                   </ListItemButton>
                 </ListItem>
 
@@ -134,7 +140,10 @@ export default function InstructionsDialog() {
                     <ListItemIcon>
                       <PlayIcon sx={{ color: '#FFFFFFCC' }}/>
                     </ListItemIcon>
-                    <ListItemText sx={{ color: '#FFFFFFCC' }} primary="Pressione o botão de 'Play' e aproveite a sua criação." />
+                    <ListItemText
+                        sx={{ color: '#FFFFFFCC' }}
+                        primary="Pressione o botão de 'Play' e aproveite a sua criação."
+                    />
                   </ListItemButton>
                 </ListItem>
 
@@ -143,7 +152,22 @@ export default function InstructionsDialog() {
                     <ListItemIcon>
                       <ShareIcon sx={{ color: '#FFFFFFCC' }}/>
                     </ListItemIcon>
-                    <ListItemText sx={{ color: '#FFFFFFCC' }} primary="Pronto, agora basta compartilhar com seus amigos :) Para isso, pressione o botão 'compartilhar' e copie o link." />
+                    <ListItemText
+                        sx={{ color: '#FFFFFFCC' }}
+                        primary="Pronto, agora basta compartilhar com seus amigos :) Para isso, pressione o botão 'compartilhar' e copie o link."
+                    />
+                  </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <AudiotrackIcon sx={{ color: '#FFFFFFCC' }}/>
+                    </ListItemIcon>
+                    <ListItemText
+                        sx={{ color: '#FFFFFFCC' }}
+                        primary="Se deseja tornar a sua música pública, temos um quadro musical anônimo no qual você pode salvá-las. Mas atenção, o quadro é reiniciado diariamente e não poderá modificar ou remover sua música após adicioná-la"
+                    />
                   </ListItemButton>
                 </ListItem>
               </List>
