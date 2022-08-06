@@ -1,7 +1,5 @@
 import * as JsonURL from "json-url";
 import { useEffect, useState } from "react";
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import {DEFAULT_SPEED, HEIGHT, MAX_WIDTH, WIDTH, WIDTH_INCREMENT_FACTOR} from "../settings";
 
 // Initial sequence pattern
@@ -25,9 +23,6 @@ export function usePattern() {
   // Compression algorithm
   const compression_agent = JsonURL("lzma");
 
-  // Popup agent
-  const Popup = withReactContent(Swal);
-
   // A deep copy of the pattern
   const getPatternCopy = () => {
     return JSON.parse(JSON.stringify(pattern));
@@ -48,7 +43,7 @@ export function usePattern() {
     setCurrWidth(WIDTH);
   };
 
-  const sharePattern = async () => {
+  const getPatternURL = async () => {
     let music = {currWidth: currWidth, content: [], speed: speed};
 
     pattern.forEach((row, x) => {
@@ -64,25 +59,7 @@ export function usePattern() {
     
     const final_url = `${current_url}?music=${compressed_cells}`;
 
-    Popup.fire({
-      title: 'Compartilhe a sua obra',
-      html: `<input id="swal-input1" class="swal2-input" value=${final_url} disabled/>`,
-      confirmButtonText: 'Copiar',
-      confirmButtonColor: '#3085d6',
-      showCancelButton: true
-    }).then((result) => {
-      if (result.isConfirmed) { 
-        navigator.clipboard.writeText(final_url).then(function() {
-          Popup.fire(
-            'Copiado!',
-            'Só falta enviar para os seus amigos :)',
-            'success'
-          )
-        }, function(err) {
-          console.error('Async: Could not copy text: ', err);
-        });
-      }
-    });
+    return music.content.length >= 1 ? final_url : '';
   };
 
   // It checks if there is a pattern in the URL
@@ -93,15 +70,16 @@ export function usePattern() {
     if (music) {
       compression_agent.decompress(music).then((result) => {
         const {currWidth, content, speed} = result;
+        const idealWidth = Math.max(currWidth, WIDTH);
 
         const patternCopy = getPatternCopy();
-        updateWidth(currWidth, patternCopy);
+        updateWidth(idealWidth, patternCopy);
         
         for (let point of content) {
           patternCopy[point[0]][point[1]] = point[2];
         }
         
-        setCurrWidth(currWidth);
+        setCurrWidth(idealWidth);
         setPattern(patternCopy);
         setSpeed(speed || DEFAULT_SPEED);
       });
@@ -162,7 +140,7 @@ export function usePattern() {
     setSpeed,
     handlePatternChange,
     cleanPattern,
-    sharePattern,
+    getPatternURL,
     incrementWidth,
     decrementWidth,
   };

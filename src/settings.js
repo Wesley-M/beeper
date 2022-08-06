@@ -1,4 +1,6 @@
 // All notes indexed (by row)
+import axios from "axios";
+
 export const NOTES = [
   "C#3",
   "D#3",
@@ -61,3 +63,10 @@ export const INSTRUMENT_NAME = {
   'fm': 'Handpan',
   'duo': 'Distorcido'
 }
+
+const BACKEND_API = "https://beeper-record.herokuapp.com/api"
+export const FRONTEND_API = "https://beeper.netlify.com"
+
+export const api = axios.create({
+  baseURL: BACKEND_API
+});

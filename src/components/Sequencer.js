@@ -13,6 +13,11 @@ import {
 import { InstrumentSelector } from "./InstrumentSelector";
 import { Note } from "./Note";
 import { SpeedSelector } from "./SpeedSelector";
+import CheckIcon from '@mui/icons-material/Check';
+import SharePanelDialog from "./SharePanelDialog";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import {toast} from "react-toastify";
 
 /**
  * A synthesizer wrapper
@@ -58,6 +63,9 @@ function Sequencer() {
   // Selected instrument at the moment
   const [instrument, setInstrument] = useState('synth');
 
+  // Popup agent
+  const Popup = withReactContent(Swal);
+
   const handleInstrumentChange = (inst) => {
     setInstrument(inst);
   };
@@ -70,7 +78,7 @@ function Sequencer() {
     setSpeed,
     handlePatternChange,
     cleanPattern,
-    sharePattern,
+    getPatternURL,
     incrementWidth,
     decrementWidth,
   } = usePattern();
@@ -122,6 +130,34 @@ function Sequencer() {
     setPlayState(Tone.Transport.state);
   }, []);
 
+  const sharePatternWithDialog = (urlPromise) => {
+    urlPromise.then(url => {
+      if (url === "") {
+        toast('Música vazia', { type: 'error' });
+      } else {
+        Popup.fire({
+          title: 'Compartilhe a sua obra',
+          html: `<input id="swal-input1" class="swal2-input" value=${url} disabled/>`,
+          confirmButtonText: 'Copiar',
+          confirmButtonColor: '#3085d6',
+          showCancelButton: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigator.clipboard.writeText(url).then(function() {
+              Popup.fire(
+                  'Copiado!',
+                  'Só falta enviar para os seus amigos :)',
+                  'success'
+              )
+            }, function(err) {
+              console.error('Async: Could not copy text: ', err);
+            });
+          }
+        });
+      }
+    })
+  }
+
   return (
       <div className="body">
         <div className="sequencer-container">
@@ -132,9 +168,8 @@ function Sequencer() {
                   <tr>
                     {row.map((value, y) => (
                         <Note
-                          key={x}
+                          key={`(${x},${y})`}
                           onClick={(e) => {
-                            console.log(e)
                             const inst = handlePatternChange({ x, y, instrument });
                             if (inst) {
                               synth
@@ -154,11 +189,11 @@ function Sequencer() {
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <button className="circle-btn" onClick={() => incrementWidth()}>
-              <span class="material-icons sequencer-width-opt">add_circle</span>
+              <span className="material-icons sequencer-width-opt">add_circle</span>
             </button>
 
             <button className="circle-btn" onClick={() => decrementWidth()}>
-              <span class="material-icons sequencer-width-opt">
+              <span className="material-icons sequencer-width-opt">
                 remove_circle
               </span>
             </button>
@@ -184,9 +219,9 @@ function Sequencer() {
               onClick={() => toggle()}
           >
             {playState == "started" ? (
-                <span class="material-icons">stop</span>
+                <span className="material-icons">stop</span>
             ) : (
-                <span class="material-icons">play_arrow</span>
+                <span className="material-icons">play_arrow</span>
             )}
           </button>
 
@@ -202,6 +237,20 @@ function Sequencer() {
 
           <Button
               variant="contained"
+              onClick={() => sharePatternWithDialog(getPatternURL())}
+              startIcon={<ShareIcon />}
+              size="large"
+              disableElevation
+          >
+            Compartilhar
+          </Button>
+
+          <SharePanelDialog
+            songURL={getPatternURL()}
+          />
+
+          <Button
+              variant="contained"
               onClick={() => cleanPattern()}
               color="error"
               size="large"
@@ -209,16 +258,6 @@ function Sequencer() {
               disableElevation
           >
             Limpar
-          </Button>
-
-          <Button
-              variant="contained"
-              onClick={() => sharePattern()}
-              startIcon={<ShareIcon />}
-              size="large"
-              disableElevation
-          >
-            Compartilhar
           </Button>
         </Stack>
 
@@ -263,7 +302,7 @@ function Sequencer() {
 
           <Button
               variant="contained"
-              onClick={() => sharePattern()}
+              onClick={() => sharePatternWithDialog(getPatternURL())}
               startIcon={<ShareIcon />}
               size="large"
               disableElevation
@@ -271,6 +310,11 @@ function Sequencer() {
           >
             Compartilhar
           </Button>
+
+          <SharePanelDialog
+              songURL={getPatternURL()}
+              fullWidth
+          />
 
           <Button
               variant="contained"

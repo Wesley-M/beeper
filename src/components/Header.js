@@ -6,6 +6,7 @@ import Container from '@mui/material/Container';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import {Grid} from "@mui/material";
 import InstructionsDialog from "./Instructions";
+import SharePanel from "./SharePanel";
 
 const Header = () => {
   return (
@@ -34,7 +35,7 @@ const Header = () => {
                 </Typography>
               </Grid>
             </Grid>
-
+            <SharePanel/>
             <InstructionsDialog/>
           </Toolbar>
         </Container>
