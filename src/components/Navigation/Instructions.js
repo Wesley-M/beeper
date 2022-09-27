@@ -36,7 +36,6 @@ export default function InstructionsDialog() {
         <Button
             sx={{
               color: 'white',
-              marginRight: { xs: '0', sm: '0', md: '10vw', lg: '14vw', xl: '14vw' },
               fontWeight: 'bold'
             }}
             onClick={handleClickOpen}

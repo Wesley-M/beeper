@@ -1,6 +1,12 @@
 // All notes indexed (by row)
 import axios from "axios";
 
+import Melodic from './images/melodic.svg'
+import Beep from './images/beep.svg'
+import Distorted from './images/distorted.svg'
+import Handpan from './images/handpan.svg'
+import Metalic from './images/metalic.svg'
+
 export const NOTES = [
   "C#3",
   "D#3",
@@ -22,19 +28,22 @@ export const NOTES = [
   "A#5"
 ];
 
-// Note Width
-export const NOTE_WD = 2.4;
+// Client dimensions
+const CLIENT_WIDTH = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+
+// Default height (unit in cells)
+export const HEIGHT = NOTES.length;
 
 // Note Height
-export const NOTE_HT = 1.2;
+export const NOTE_HT = (100 / HEIGHT) * 0.70;
+
+// Note Width
+export const NOTE_WD = 2;
 
 // Default width cells
 export const WIDTH = Math.floor(
-    Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) / (NOTE_WD * 20 + 4)
+    CLIENT_WIDTH / (NOTE_WD * 20)
 );
-
-// Default height in cells
-export const HEIGHT = NOTES.length;
 
 // Factor in which the width changes
 export const WIDTH_INCREMENT_FACTOR = 10;
@@ -45,23 +54,28 @@ export const MAX_WIDTH = 100;
 // Default speed in which the active column changes
 export const DEFAULT_SPEED = 10;
 
-// Factors that change the speed
-export const SPEED_FACTORS = [0.5, 1, 1.25, 1.5, 2];
-
 export const INSTRUMENT_COLOR = {
-  'synth': '#b517d1',
-  'metal': '#eded2f',
-  'membrane': '#20acf7',
-  'fm': '#f57b17',
-  'duo': '#c42222'
+  'synth': '#B872FC',
+  'metal': '#C59826',
+  'membrane': '#20ACF7',
+  'fm': '#F57B17',
+  'duo': '#C42222'
 }
 
 export const INSTRUMENT_NAME = {
-  'synth': 'Melódico',
-  'metal': 'Metálico',
+  'synth': 'Melodic',
+  'metal': 'Metalic',
   'membrane': 'Beep',
   'fm': 'Handpan',
-  'duo': 'Distorcido'
+  'duo': 'Distorted'
+}
+
+export const INSTRUMENT_ICON = {
+  'synth': Melodic,
+  'metal': Metalic,
+  'membrane': Beep,
+  'fm': Handpan,
+  'duo': Distorted
 }
 
 const BACKEND_API = "https://beeper-record.herokuapp.com/api"

@@ -11,6 +11,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import * as React from 'react';
 import { toast } from "react-toastify";
 import { api } from "../settings";
+import ShareIcon from "@mui/icons-material/Share";
+import {CustomButton} from "./CustomButton";
 
 export default function SharePanelDialog({songURL, ...other}) {
   const [open, setOpen] = React.useState(false);
@@ -74,17 +76,11 @@ export default function SharePanelDialog({songURL, ...other}) {
 
   return (
       <>
-        <Button
-            variant="contained"
+        <CustomButton
             onClick={handleClickOpen}
-            startIcon={<CheckIcon />}
-            size="large"
-            color="success"
-            disableElevation
-            {...other}
-        >
-          Publicar
-        </Button>
+            Icon={CheckIcon}
+            text='Publish'
+        />
 
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Quadro Musical</DialogTitle>

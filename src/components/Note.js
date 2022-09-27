@@ -6,11 +6,11 @@ import {NOTE_HT, NOTE_WD} from '../settings';
 export function Note({ onClick, selected, active, color }) {
   const noteStyle = {
     minWidth: `${NOTE_WD}em`,
-    height: `${NOTE_HT}em`,
+    height: `${NOTE_HT}vh`,
     border: "0 solid",
-    borderColor: active ? "rgba(255,255,255,0.7)" : selected ? color : "#00000011",
-    borderWidth: active ? "3px" : "2px",
-    backgroundColor: selected ? color : "rgba(180,180,180,0.4)",
+    borderColor: active ? "rgba(255,255,255,0.7)" : selected ? color : "#28282855",
+    borderWidth: active ? "3px" : "1px",
+    backgroundColor: selected ? color : "#545454",
     opacity: active && selected ? 0.9 : 1,
     transition: "background 100ms"
   };

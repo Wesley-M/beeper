@@ -2,8 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "./components/Navigation/Footer";
+import Header from "./components/Navigation/Header";
 import Sequencer from "./components/Sequencer";
 
 function App() {
@@ -15,7 +15,6 @@ function App() {
       <div className="App">
         <Header />
         <Sequencer />
-        <Footer />
         <ToastContainer
           position="bottom-right"
           autoClose={5000}

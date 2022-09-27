@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import {useState} from "react";
 import Button from "@mui/material/Button";
-import RefreshIcon from '@mui/icons-material/Refresh';
-import {INSTRUMENT_COLOR, INSTRUMENT_NAME} from "../settings";
+import {INSTRUMENT_COLOR, INSTRUMENT_ICON, INSTRUMENT_NAME} from "../settings";
+import {Stack} from "@mui/material";
 
 export function InstrumentSelector({ onChange, synth, ...other }) {
   const instruments = Object.keys(INSTRUMENT_COLOR);
@@ -16,16 +16,38 @@ export function InstrumentSelector({ onChange, synth, ...other }) {
     setCurrInstrument(old => (old + 1) % instruments.length);
   }
 
+  const Icon = INSTRUMENT_ICON[instruments[currIntrument]]
+
   return (
       <Button
           variant="contained"
           onClick={() => toggleInstrument()}
           size="large"
-          startIcon={<RefreshIcon />}
           disableElevation
+          sx={{
+            textTransform: 'capitalize',
+            backgroundColor: 'transparent',
+            opacity: 0.7,
+            "&:hover": {
+              backgroundColor: `${INSTRUMENT_COLOR[instruments[currIntrument]]}11`,
+              opacity: 1
+            }
+          }}
           {...other}
       >
-        {INSTRUMENT_NAME[instruments[currIntrument]]}
+        <Stack spacing={-0.5}>
+          <Box>
+            <img width={40} height={40} src={Icon}/>
+          </Box>
+          <Box
+              sx={{
+                color: INSTRUMENT_COLOR[instruments[currIntrument]],
+                fontWeight: 'bold'
+              }}
+          >
+            {INSTRUMENT_NAME[instruments[currIntrument]]}
+          </Box>
+        </Stack>
       </Button>
   );
 }

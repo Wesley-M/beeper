@@ -1,6 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #545454;
   min-height: 100vh;
   color: white;
 }
@@ -11,18 +15,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 1.5em;
 }
 
 .sequencer-container {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
 }
 
 .sequencer {
-  width: 90%;
+  width: 100%;
   overflow-x: auto;
 }
 
@@ -83,7 +86,7 @@
 }
 
 .start-btn .material-icons{
-  font-size: 3em;
+  font-size: 4em;
 }
 
 .clear-btn:hover, .share-btn, .start-btn:hover {
@@ -141,4 +144,6 @@
 table {
   line-height: 0;
   border-collapse: collapse;
+  width: 100%;
+  height: 40vh;
 }
