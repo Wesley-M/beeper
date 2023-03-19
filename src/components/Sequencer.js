@@ -1,7 +1,6 @@
-import {PlayArrow, Stop} from "@mui/icons-material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from "@mui/icons-material/Share";
-import {Button, IconButton, Stack} from "@mui/material";
+import {Stack} from "@mui/material";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import * as Tone from "tone";
 import "../App.css";
@@ -72,7 +71,6 @@ function Sequencer() {
 
   const {
     pattern,
-    setPattern,
     currWidth,
     userDefaultSpeed,
     speed,
@@ -99,7 +97,7 @@ function Sequencer() {
               let instrument_chord = {};
 
               // Loop current pattern
-              pattern.map((row, noteIndex) => {
+              pattern.forEach((row, noteIndex) => {
                 // If active
                 if (row[col]) {
                   if (!instrument_chord[row[col]]) {
@@ -179,7 +177,7 @@ function Sequencer() {
                               }
                             }}
                             selected={value}
-                            active={activeColumn == y}
+                            active={activeColumn === y}
                             color={INSTRUMENT_COLOR[value]}
                         />
                     ))}
@@ -221,11 +219,11 @@ function Sequencer() {
           <button
               className="btn start-btn"
               style={{
-                backgroundColor: playState == "started" ? "#f0264bCC" : "#11A4E2",
+                backgroundColor: playState === "started" ? "#f0264bCC" : "#11A4E2",
               }}
               onClick={() => toggle()}
           >
-            {playState == "started" ? (
+            {playState === "started" ? (
                 <span className="material-icons">stop</span>
             ) : (
                 <span className="material-icons">play_arrow</span>
@@ -275,11 +273,11 @@ function Sequencer() {
             <button
                 className="btn start-btn"
                 style={{
-                  backgroundColor: playState == "started" ? "#f0264bCC" : "#11A4E2",
+                  backgroundColor: playState === "started" ? "#f0264bCC" : "#11A4E2",
                 }}
                 onClick={() => toggle()}
             >
-              {playState == "started" ? (
+              {playState === "started" ? (
                   <span className="material-icons">stop</span>
               ) : (
                   <span className="material-icons">play_arrow</span>
