@@ -1,4 +1,3 @@
-// All notes indexed (by row)
 import axios from "axios";
 
 import Melodic from './images/melodic.svg'
@@ -7,6 +6,7 @@ import Distorted from './images/distorted.svg'
 import Handpan from './images/handpan.svg'
 import Metalic from './images/metalic.svg'
 
+// All notes indexed (by row)
 export const NOTES = [
   "C#3",
   "D#3",
@@ -28,10 +28,10 @@ export const NOTES = [
   "A#5"
 ];
 
-// Client dimensions
+// Client width
 const CLIENT_WIDTH = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 
-// Default height (unit in cells)
+// Default height cells
 export const HEIGHT = NOTES.length;
 
 // Note Height
@@ -54,6 +54,7 @@ export const MAX_WIDTH = 100;
 // Default speed in which the active column changes
 export const DEFAULT_SPEED = 10;
 
+// Default mapping of instruments to colors
 export const INSTRUMENT_COLOR = {
   'synth': '#B872FC',
   'metal': '#C59826',
@@ -78,9 +79,13 @@ export const INSTRUMENT_ICON = {
   'duo': Distorted
 }
 
-const BACKEND_API = "https://beeper-record.herokuapp.com/api"
+// The backend api url
+const BACKEND_API = "https://beeper-record.cyclic.app/api"
+
+// The frontend api url
 export const FRONTEND_API = "https://beeper.netlify.com"
 
+// The backend api instance
 export const api = axios.create({
   baseURL: BACKEND_API
 });

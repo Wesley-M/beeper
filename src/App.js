@@ -2,12 +2,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Footer from "./components/Navigation/Footer";
 import Header from "./components/Navigation/Header";
 import Sequencer from "./components/Sequencer";
 
 function App() {
-  // Create a client
+  // Create new query client instance
   const queryClient = new QueryClient();
 
   return (
