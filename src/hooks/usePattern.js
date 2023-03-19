@@ -17,8 +17,11 @@ export function usePattern() {
   // The current width of the pattern board
   const [currWidth, setCurrWidth] = useState(WIDTH);
 
+  // The initial speed defined by the user
+  const [userDefaultSpeed, setUserDefaultSpeed] = useState(DEFAULT_SPEED);
+
   // The speed in which the pattern playing changes
-  const [speed, setSpeed] = useState(DEFAULT_SPEED);
+  const [speed, setSpeed] = useState(userDefaultSpeed);
 
   // Compression algorithm
   const compression_agent = JsonURL("lzma");
@@ -79,10 +82,11 @@ export function usePattern() {
         for (let point of content) {
           patternCopy[point[0]][point[1]] = point[2];
         }
-        
+                
         setCurrWidth(idealWidth);
         setPattern(patternCopy);
         setSpeed(speed || DEFAULT_SPEED);
+        setUserDefaultSpeed(speed || DEFAULT_SPEED);
       });
     }
   }, []);
@@ -137,6 +141,7 @@ export function usePattern() {
     pattern,
     setPattern,
     currWidth,
+    userDefaultSpeed,
     speed,
     setSpeed,
     handlePatternChange,

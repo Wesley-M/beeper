@@ -74,6 +74,7 @@ function Sequencer() {
     pattern,
     setPattern,
     currWidth,
+    userDefaultSpeed,
     speed,
     setSpeed,
     handlePatternChange,
@@ -237,7 +238,7 @@ function Sequencer() {
           />
 
           <SpeedSelector
-              speed={speed}
+              defSpeed={userDefaultSpeed}
               handleSpeedChange={setSpeed}
           />
 
@@ -314,7 +315,7 @@ function Sequencer() {
             />
 
             <SpeedSelector
-                speed={speed}
+                defSpeed={speed}
                 handleSpeedChange={setSpeed}
             />
           </Stack>
