@@ -26,7 +26,25 @@
 
 .sequencer {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: overlay;
+}
+
+.sequencer::-webkit-scrollbar {
+  height: 10px;
+}
+
+.sequencer::-webkit-scrollbar-track {
+  background-color: #696969;
+}
+
+.sequencer::-webkit-scrollbar-thumb {
+  background-color: rgb(32, 172, 247);
+}
+
+@supports (-moz-appearance:none) {
+  .sequencer {
+    overflow-x: auto;
+  }
 }
 
 .sequencer-options {

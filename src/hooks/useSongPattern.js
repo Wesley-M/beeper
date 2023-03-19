@@ -10,12 +10,14 @@ const initialPattern = Array.from({ length: HEIGHT }, (e) =>
 /**
  * It manages the pattern and its changes
  */
-export function usePattern() {
-  // The current pattern
+export function useSongPattern() {
+  /**
+   * The song pattern. Each cell represents an instrument, and each row a note.
+   * */
   const [pattern, setPattern] = useState(initialPattern);
 
   // The current width of the pattern board
-  const [currWidth, setCurrWidth] = useState(WIDTH);
+  const [patternWidth, setPatternWidth] = useState(WIDTH);
 
   // The initial speed defined by the user
   const [userDefaultSpeed, setUserDefaultSpeed] = useState(DEFAULT_SPEED);
@@ -43,12 +45,12 @@ export function usePattern() {
   // Cleans all active cells
   const cleanPattern = () => {
     setPattern(initialPattern);
-    setCurrWidth(WIDTH);
+    setPatternWidth(WIDTH);
     window.location.href = FRONTEND_API;
   };
 
   const getPatternURL = async () => {
-    let music = {currWidth: currWidth, content: [], speed: speed};
+    let music = {currWidth: patternWidth, content: [], speed: speed};
 
     pattern.forEach((row, x) => {
       row.forEach((cell, y) => {
@@ -60,7 +62,6 @@ export function usePattern() {
 
     const compressed_cells = await compression_agent.compress(music);
     const current_url =  window.location.href.split('?')[0];
-    
     const final_url = `${current_url}?music=${compressed_cells}`;
 
     return music.content.length >= 1 ? final_url : '';
@@ -83,7 +84,7 @@ export function usePattern() {
           patternCopy[point[0]][point[1]] = point[2];
         }
                 
-        setCurrWidth(idealWidth);
+        setPatternWidth(idealWidth);
         setPattern(patternCopy);
         setSpeed(speed || DEFAULT_SPEED);
         setUserDefaultSpeed(speed || DEFAULT_SPEED);
@@ -115,15 +116,15 @@ export function usePattern() {
   */
   useEffect(() => {
     const patternCopy = getPatternCopy();
-    updateWidth(currWidth, patternCopy);
+    updateWidth(patternWidth, patternCopy);
     setPattern(patternCopy);
-  }, [currWidth]);
+  }, [patternWidth]);
   
   /**
    * It increments the size of the board
    */
   const incrementWidth = () => {
-    setCurrWidth((oldWidth) =>
+    setPatternWidth((oldWidth) =>
       Math.min(oldWidth + WIDTH_INCREMENT_FACTOR, MAX_WIDTH)
     );
   };
@@ -132,7 +133,7 @@ export function usePattern() {
    * It decrements the size of the board
    */
   const decrementWidth = () => {
-    setCurrWidth((oldWidth) =>
+    setPatternWidth((oldWidth) =>
       Math.max(oldWidth - WIDTH_INCREMENT_FACTOR, WIDTH)
     );
   };
@@ -140,7 +141,7 @@ export function usePattern() {
   return {
     pattern,
     setPattern,
-    currWidth,
+    patternWidth,
     userDefaultSpeed,
     speed,
     setSpeed,

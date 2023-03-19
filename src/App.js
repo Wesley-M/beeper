@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Header from "./components/Navigation/Header";
-import Sequencer from "./components/Sequencer";
+import Sequencer from "./components/Sequencer/Sequencer";
 
 function App() {
   // Create new query client instance

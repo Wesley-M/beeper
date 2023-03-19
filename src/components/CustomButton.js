@@ -10,6 +10,7 @@ export const CustomButton = ({ onClick, Icon, text }) => {
           size="large"
           disableElevation
           sx={{
+            marginTop: 0,
             textTransform: 'capitalize',
             backgroundColor: 'transparent',
             "&:hover": {
