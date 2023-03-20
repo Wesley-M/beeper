@@ -31,6 +31,34 @@ export default function InstructionsDialog() {
     setOpen(false);
   };
 
+  const content = {
+    message: "This is an interactive musical experiment. And its goals are to allow fast and fun creation of songs\n" +
+      ", as well as to enable the sharing of new experiences with your friends.\n",
+    instructions: [
+      {
+        Icon: MouseIcon,
+        text: "To create a song, tap or hold and drag over the cells."
+      },
+      {
+        Icon: GraphicEqIcon,
+        text: "There are a few sounds to experiment with! Change them clicking on the icon at the bottom left."
+      },
+      {
+        Icon: PlayIcon,
+        text: "Press play and enjoy your creation."
+      },
+      {
+        Icon: ShareIcon,
+        text: "Alright! Now you just need to share with your friends :) Press 'Share' and copy the link."
+      },
+      {
+        Icon: AudiotrackIcon,
+        text: "If you wish to turn your song public, we hold an anonymous song board! Just share it. But caution, the board" +
+          " is restarted everyday and you can't edit your song after submission."
+      },
+    ]
+  }
+
   return (
       <div>
         <Button
@@ -40,7 +68,7 @@ export default function InstructionsDialog() {
             }}
             onClick={handleClickOpen}
         >
-          Instruções
+          Instructions
         </Button>
         <Dialog
             fullScreen
@@ -59,7 +87,7 @@ export default function InstructionsDialog() {
                 <CloseIcon />
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                Instruções
+                Instructions
               </Typography>
             </Toolbar>
           </AppBar>
@@ -100,75 +128,27 @@ export default function InstructionsDialog() {
                   padding: '1em 0'
                 }}
               >
-                Bem-vind@!
+                Welcome!
               </Typography>
 
               <Typography sx={{ color: '#FFFFFFCC', fontSize: '1.2em' }}>
-                Esse projeto se trata de um experimento musical interativo. E seu objetivo é permitir
-                a criação rápida e divertida de músicas, como também o compartilhamento de experiências
-                com seus amigos.
+                {content.message}
               </Typography>
 
               <List>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <MouseIcon sx={{ color: '#FFFFFFCC' }} />
-                    </ListItemIcon>
-                    <ListItemText
+                {content.instructions.map(({ text, Icon}) => (
+                  <ListItem key={text} disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Icon sx={{ color: '#FFFFFFCC' }} />
+                      </ListItemIcon>
+                      <ListItemText
                         sx={{ color: '#FFFFFFCC' }}
-                        primary="Para criar suas músicas, clique ou arraste seu mouse (pressionando o botão esquerdo) nas células da grade."
-                    />
-                  </ListItemButton>
-                </ListItem>
-
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <GraphicEqIcon sx={{ color: '#FFFFFFCC' }}/>
-                    </ListItemIcon>
-                    <ListItemText
-                        sx={{ color: '#FFFFFFCC' }}
-                        primary="Existem diferentes sons para você experimentar! Mude o tipo clicando no botão 'Melódico' na parte inferior da tela."
-                    />
-                  </ListItemButton>
-                </ListItem>
-
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <PlayIcon sx={{ color: '#FFFFFFCC' }}/>
-                    </ListItemIcon>
-                    <ListItemText
-                        sx={{ color: '#FFFFFFCC' }}
-                        primary="Pressione o botão de 'Play' e aproveite a sua criação."
-                    />
-                  </ListItemButton>
-                </ListItem>
-
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <ShareIcon sx={{ color: '#FFFFFFCC' }}/>
-                    </ListItemIcon>
-                    <ListItemText
-                        sx={{ color: '#FFFFFFCC' }}
-                        primary="Pronto, agora basta compartilhar com seus amigos :) Para isso, pressione o botão 'compartilhar' e copie o link."
-                    />
-                  </ListItemButton>
-                </ListItem>
-
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <AudiotrackIcon sx={{ color: '#FFFFFFCC' }}/>
-                    </ListItemIcon>
-                    <ListItemText
-                        sx={{ color: '#FFFFFFCC' }}
-                        primary="Se deseja tornar a sua música pública, temos um quadro musical anônimo no qual você pode salvá-las. Mas atenção, o quadro é reiniciado diariamente e não poderá modificar ou remover sua música após adicioná-la"
-                    />
-                  </ListItemButton>
-                </ListItem>
+                        primary={text}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
               </List>
             </Container>
           </Box>

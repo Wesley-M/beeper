@@ -22,7 +22,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function SharePanel() {
   const [open, setOpen] = useState(false);
-  const [songs, setSongs] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,7 +48,7 @@ export default function SharePanel() {
         }}
         onClick={handleClickOpen}
       >
-        Quadro Musical
+        Song Board
       </Button>
       <Dialog
         fullScreen
