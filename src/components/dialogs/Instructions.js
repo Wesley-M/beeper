@@ -65,8 +65,10 @@ export default function InstructionsDialog() {
       <div>
         <Button
             sx={{
-              color: 'white',
-              fontWeight: 'bold'
+              color: '#FFFFFFCC',
+              "&:hover": {
+                color: "#FFF"
+              }
             }}
             onClick={handleClickOpen}
         >

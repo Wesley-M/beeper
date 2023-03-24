@@ -42,7 +42,7 @@ export function SpeedSelector({ defSpeed, handleSpeedChange }) {
               max={4}
               sx={{
                 width: '60%',
-                minWidth: '100px'
+                minWidth: '80px'
               }}
               onChange={(e) => toggleSpeed(Number(e.target.value))}
               valueLabelFormat={value => <div>{'x' + value}</div>}

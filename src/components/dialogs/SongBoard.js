@@ -65,7 +65,7 @@ const SongCard = ({song}) => {
   );
 }
 
-export default function PublishingPanel() {
+export default function SongBoard() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -87,9 +87,11 @@ export default function PublishingPanel() {
     <div>
       <Button
         sx={{
-          color: "white",
-          fontWeight: "bold",
           whiteSpace: "nowrap",
+          color: '#FFFFFFCC',
+          "&:hover": {
+            color: "#FFF"
+          }
         }}
         onClick={handleClickOpen}
       >

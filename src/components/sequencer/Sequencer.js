@@ -109,35 +109,6 @@ function Sequencer() {
     setPlayState(Tone.Transport.state);
   }, []);
 
-
-  const sharePatternWithDialog = (urlPromise) => {
-    urlPromise.then(url => {
-      if (url === "") {
-        toast('Música vazia', {type: 'error'});
-      } else {
-        Popup.fire({
-          title: 'Compartilhe a sua obra',
-          html: `<input id="swal-input1" class="swal2-input" value=${url} disabled/>`,
-          confirmButtonText: 'Copiar',
-          confirmButtonColor: '#3085d6',
-          showCancelButton: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigator.clipboard.writeText(url).then(function () {
-              Popup.fire(
-                'Copiado!',
-                'Só falta enviar para os seus amigos :)',
-                'success'
-              )
-            }, function (err) {
-              console.error('Async: Could not copy text: ', err);
-            });
-          }
-        });
-      }
-    })
-  }
-
   return (
     <>
       <Box className="sequencer-container">
@@ -166,7 +137,6 @@ function Sequencer() {
         synth={synth}
         playState={playState}
         handleInstrumentChange={handleInstrumentChange}
-        sharePatternWithDialog={sharePatternWithDialog}
         toggleSequencerStatus={toggleSequencerStatus}
         {...patternParams}
       />

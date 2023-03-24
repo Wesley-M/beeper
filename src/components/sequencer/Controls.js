@@ -4,26 +4,12 @@ import {SpeedSelector} from "./SpeedSelector";
 import {CustomButton} from "../ui/CustomButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShareIcon from "@mui/icons-material/Share";
-import SharePanelDialog from "../dialogs/SharePanelDialog";
+import PublishToSongBoard from "../dialogs/usePublishToSongBoard";
 import React from "react";
-
-const ControlsContainer = styled(Stack)(({theme}) => ({
-  width: '100%',
-  height: '20vh',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  [theme.breakpoints.up('xs')]: {
-    display: 'none',
-  },
-  [theme.breakpoints.up('lg')]: {
-    display: 'flex',
-  },
-  position: 'absolute',
-  top: 'calc(80vh + 0.75em)',
-  backgroundColor: '#282828',
-  paddingLeft: '1.5em'
-}));
+import {shareSongPattern} from "../dialogs/shareSongPattern";
+import CheckIcon from "@mui/icons-material/Check";
+import usePublishToSongBoard from "../dialogs/usePublishToSongBoard";
+import {DesktopControlsContainer, MobileControlsContainer} from "./Controls.styles";
 
 export const Controls = (props) => {
   const {
@@ -36,9 +22,10 @@ export const Controls = (props) => {
     synth,
     playState,
     handleInstrumentChange,
-    sharePatternWithDialog,
     toggleSequencerStatus
   } = props;
+
+  const { promptToPublish } = usePublishToSongBoard(getPatternURL());
 
   return (
     <>
@@ -54,7 +41,7 @@ export const Controls = (props) => {
         </button>
       </Box>
 
-      <ControlsContainer>
+      <DesktopControlsContainer>
         <button
           className="btn start-btn"
           style={{
@@ -86,26 +73,19 @@ export const Controls = (props) => {
         />
 
         <CustomButton
-          onClick={() => sharePatternWithDialog(getPatternURL())}
+          onClick={() => shareSongPattern(getPatternURL())}
           Icon={ShareIcon}
           text='Share'
         />
 
-        <SharePanelDialog
-          songURL={getPatternURL()}
+        <CustomButton
+          onClick={promptToPublish}
+          Icon={CheckIcon}
+          text='Publish'
         />
-      </ControlsContainer>
+      </DesktopControlsContainer>
 
-      <Stack
-        direction={{xs: 'column', sm: 'column', md: 'column', lg: 'row', xl: 'row'}}
-        spacing={2}
-        sx={{
-          width: '95%',
-          alignItems: 'center',
-          marginTop: '1.5em',
-          display: {xs: 'flex', sm: 'flex', md: 'flex', lg: 'none', xl: 'none'}
-        }}
-      >
+      <MobileControlsContainer>
         <Stack direction="row">
           <button
             className="btn start-btn"
@@ -128,13 +108,15 @@ export const Controls = (props) => {
           />
 
           <CustomButton
-            onClick={() => sharePatternWithDialog(getPatternURL())}
+            onClick={() => shareSongPattern(getPatternURL())}
             Icon={ShareIcon}
             text='Share'
           />
 
-          <SharePanelDialog
-            songURL={getPatternURL()}
+          <CustomButton
+            onClick={promptToPublish}
+            Icon={CheckIcon}
+            text='Publish'
           />
         </Stack>
 
@@ -154,7 +136,7 @@ export const Controls = (props) => {
             handleSpeedChange={setSpeed}
           />
         </Stack>
-      </Stack>
+      </MobileControlsContainer>
     </>
   )
 }
