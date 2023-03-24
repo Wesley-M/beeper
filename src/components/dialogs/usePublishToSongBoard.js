@@ -1,8 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
-import * as React from 'react';
 import { toast } from "react-toastify";
 import { api } from "../../settings";
-import Popup from 'sweetalert2/src/sweetalert2.js'
+import Popup from 'sweetalert2/dist/sweetalert2.js'
 
 export default function usePublishToSongBoard(songURL) {
   const queryClient = useQueryClient();

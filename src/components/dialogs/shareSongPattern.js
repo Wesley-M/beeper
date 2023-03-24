@@ -1,5 +1,5 @@
 import {toast} from "react-toastify";
-import Popup from 'sweetalert2/src/sweetalert2.js'
+import Popup from 'sweetalert2/dist/sweetalert2.js'
 
 export const shareSongPattern = (patternUrl) => {
   patternUrl.then(url => {

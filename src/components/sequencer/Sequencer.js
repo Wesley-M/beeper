@@ -1,6 +1,4 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import ShareIcon from "@mui/icons-material/Share";
-import {Box, Stack} from "@mui/material";
+import {Box} from "@mui/material";
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import * as Tone from "tone";
 import "../../App.css";
@@ -10,16 +8,12 @@ import {
   NOTES
 } from "../../settings";
 import {Note} from "./Note";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
-import {toast} from "react-toastify";
 import {playChord} from "../../scripts/sequencer";
 import {seq} from "../../scripts/arrays";
 import {Synth} from "../../scripts/synth";
 import {toToneDuration} from "../../scripts/tone";
 import {setContainerScrollPos} from "../../scripts/scroll";
 import {Controls} from "./Controls";
-import CustomScroll from 'react-custom-scroll';
 
 // A synthesizer object
 const synth = new Synth();
@@ -36,9 +30,6 @@ function Sequencer() {
 
   // Selected instrument at the moment
   const [instrument, setInstrument] = useState('synth');
-
-  // Popup agent
-  const Popup = withReactContent(Swal);
 
   const {
     pattern,

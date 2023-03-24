@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Header from "./components/navigation/Header";
 import Sequencer from "./components/sequencer/Sequencer";
-import '@sweetalert2/theme-dark';
+import '@sweetalert2/theme-dark/dark.css';
 import {createTheme, ThemeProvider} from "@mui/material";
 
 function App() {
