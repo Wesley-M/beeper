@@ -5,12 +5,6 @@ import { useEffect, useState } from "react";
 
 export function SpeedSelector({ defSpeed, handleSpeedChange }) {
   const [speedFactor, setSpeedFactor] = useState(1);
-  
-  // The step of the slider
-  const FACTOR_STEP = 0.5;
-
-  // The step of speed when factor changes
-  const FACTOR_SPEED_STEP = FACTOR_STEP * DEFAULT_SPEED;
 
   // Changes the speed based on a factor
   const toggleSpeed = (factor = 1) => {
@@ -20,7 +14,7 @@ export function SpeedSelector({ defSpeed, handleSpeedChange }) {
 
   // Set the default speed when the default changes
   useEffect(() => {
-    const defFactor = ((defSpeed || DEFAULT_SPEED) - DEFAULT_SPEED) / FACTOR_SPEED_STEP;
+    const defFactor = ((defSpeed || DEFAULT_SPEED) / DEFAULT_SPEED);
     setSpeedFactor(defFactor);
     console.log("def speed change ", defSpeed);
   }, [defSpeed]);
