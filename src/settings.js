@@ -35,7 +35,7 @@ const CLIENT_WIDTH = Math.max(document.documentElement.clientWidth || 0, window.
 export const HEIGHT = NOTES.length;
 
 // Note Height
-export const NOTE_HT = (100 / HEIGHT) * 0.70;
+export const NOTE_HT = (100 / HEIGHT) * 0.65;
 
 // Note Width
 export const NOTE_WD = 2;

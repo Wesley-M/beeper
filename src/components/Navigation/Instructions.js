@@ -1,9 +1,9 @@
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
-import CloseIcon from '@mui/icons-material/Close';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import MouseIcon from '@mui/icons-material/Mouse';
 import PlayIcon from '@mui/icons-material/PlayArrow';
 import ShareIcon from '@mui/icons-material/Share';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import AppBar from '@mui/material/AppBar';
 import Box from "@mui/material/Box";
@@ -15,6 +15,8 @@ import Slide from '@mui/material/Slide';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import {ReactComponent as Logo} from '../../images/logo.svg'
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,8 +34,8 @@ export default function InstructionsDialog() {
   };
 
   const content = {
-    message: "This is an interactive musical experiment. And its goals are to allow fast and fun creation of songs\n" +
-      ", as well as to enable the sharing of new experiences with your friends.\n",
+    message: "This is an interactive musical experiment. And its goals are to allow fast and fun creation " +
+      "of songs, as well as to enable the sharing of new experiences with your friends.\n",
     instructions: [
       {
         Icon: MouseIcon,
@@ -76,7 +78,7 @@ export default function InstructionsDialog() {
             onClose={handleClose}
             TransitionComponent={Transition}
         >
-          <AppBar sx={{ position: 'relative', backgroundColor: "#151515" }}>
+          <AppBar sx={{ position: 'relative', backgroundColor: "#282828" }}>
             <Toolbar>
               <IconButton
                   edge="start"
@@ -84,41 +86,20 @@ export default function InstructionsDialog() {
                   onClick={handleClose}
                   aria-label="close"
               >
-                <CloseIcon />
+                <KeyboardBackspaceIcon />
               </IconButton>
-              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                Instructions
-              </Typography>
+              <Box sx={{ margin: "0.5em" }}/>
+              <Logo width={90}/>
             </Toolbar>
           </AppBar>
           <Box
               sx={{
                 minHeight: '100vh',
-                backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                backgroundColor: '#282828',
                 padding: '2em 0'
               }}
           >
             <Container maxWidth="md">
-              <Grid container direction="row" alignItems="center" spacing={0.5}>
-                <Grid item>
-                  <AudiotrackIcon sx={{ color: 'white', fontSize: '2em' }}/>
-                </Grid>
-                <Grid item>
-                  <Typography
-                      variant="h6"
-                      noWrap
-                      sx={{
-                        mr: 2,
-                        fontFamily: 'Bree Serif, serif',
-                        color: 'white',
-                        fontSize: '2em',
-                        textDecoration: 'none'
-                      }}
-                  >
-                    Beeper
-                  </Typography>
-                </Grid>
-              </Grid>
 
               <Typography
                 sx={{
@@ -128,7 +109,7 @@ export default function InstructionsDialog() {
                   padding: '1em 0'
                 }}
               >
-                Welcome!
+                Instructions
               </Typography>
 
               <Typography sx={{ color: '#FFFFFFCC', fontSize: '1.2em' }}>

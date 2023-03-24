@@ -20,7 +20,7 @@ const ControlsContainer = styled(Stack)(({theme}) => ({
     display: 'flex',
   },
   position: 'absolute',
-  top: 'calc(80vh + 0.25em)',
+  top: 'calc(80vh + 0.75em)',
   backgroundColor: '#282828',
   paddingLeft: '1.5em'
 }));

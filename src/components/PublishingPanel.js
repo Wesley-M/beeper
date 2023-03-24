@@ -1,6 +1,6 @@
 import { Hearing } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Grid } from "@mui/material";
+import {Grid, styled} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,11 +16,55 @@ import * as React from "react";
 import { useState } from "react";
 import { api, FRONTEND_API } from "../settings";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const PublishingPanelRevealTransition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function SharePanel() {
+// const SongCard = () => {
+//   return (
+//     <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+//       <Link
+//         href={`${FRONTEND_API}?music=${song.content}`}
+//         sx={{
+//           textDecoration: 'none',
+//           color: '#FFFFFFDC',
+//           fontWeight: 'bold',
+//           width: '30%',
+//           "&:hover": {
+//             color: '#FFFFFF'
+//           }
+//         }}
+//       >
+//         <Grid
+//           container
+//           direction="row"
+//           alignItems="center"
+//           spacing={0.5}
+//           sx={{
+//             backgroundColor: "#000000BB",
+//             padding: '1em',
+//             borderRadius: '0.4em',
+//             transition: 'background 250ms ease',
+//             "&:hover": {
+//               backgroundColor: "#000000CC"
+//             }
+//           }}
+//         >
+//           <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+//             <Typography noWrap sx={{ fontSize: '1.1em' }} title={song.name}>
+//               {song.name}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
+//             <Hearing/>
+//           </Grid>
+//         </Grid>
+//       </Link>
+//     </Grid>
+//   );
+// }
+
+export default function PublishingPanel() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -54,7 +98,7 @@ export default function SharePanel() {
         fullScreen
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}
+        TransitionComponent={PublishingPanelRevealTransition}
       >
         <AppBar sx={{ position: "relative", backgroundColor: "#151515" }}>
           <Toolbar>
@@ -67,7 +111,7 @@ export default function SharePanel() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Quadro Musical
+              Song Board
             </Typography>
           </Toolbar>
         </AppBar>
@@ -127,14 +171,15 @@ export default function SharePanel() {
             {songsReq?.data?.length === 0 &&
                 <Typography
                     sx={{
-                      fontSize: {xs: '2.5em', sm: '2.5em', md: '3em', lg: '3.5em', xl: '4em'},
+                      fontSize: {xs: '2.5em', md: '3em', xl: '4em'},
                       fontWeight: 'bold',
                       opacity: 0.3,
                       textAlign: 'center',
                       margin: '2em 1em'
                     }}
                 >
-                  Melhore o dia de alguém, compartilhe uma música hoje 😃
+                  Make the day of someone else better!
+                  Share a song today ♫
                 </Typography>
             }
           </Container>

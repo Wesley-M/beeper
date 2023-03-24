@@ -1,4 +1,4 @@
-import {DEFAULT_SPEED, SPEED_FACTORS} from "../settings";
+import {DEFAULT_SPEED} from "../settings";
 import {Slider, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
@@ -40,6 +40,7 @@ export function SpeedSelector({ defSpeed, handleSpeedChange }) {
           <Slider
               aria-label="Speed"
               valueLabelDisplay="auto"
+              size="large"
               value={speedFactor}
               step={0.5}
               marks
