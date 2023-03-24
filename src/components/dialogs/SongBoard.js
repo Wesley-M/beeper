@@ -163,7 +163,7 @@ export default function SongBoard() {
                         flex: 4
                       }}
                   >
-                    It's all empty here! <br/>
+                    It's all empty here!<br/>
                     Share a song today ♫
                   </Typography>
                 </Stack>
