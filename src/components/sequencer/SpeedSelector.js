@@ -1,4 +1,4 @@
-import {DEFAULT_SPEED} from "../settings";
+import {DEFAULT_SPEED} from "../../settings";
 import {Slider, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";

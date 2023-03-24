@@ -2,8 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Header from "./components/Navigation/Header";
-import Sequencer from "./components/Sequencer/Sequencer";
+import Header from "./components/navigation/Header";
+import Sequencer from "./components/sequencer/Sequencer";
 
 function App() {
   // Create new query client instance

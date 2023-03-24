@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import {useState} from "react";
-import {INSTRUMENT_COLOR, INSTRUMENT_ICON, INSTRUMENT_NAME} from "../settings";
+import {INSTRUMENT_COLOR, INSTRUMENT_ICON, INSTRUMENT_NAME} from "../../settings";
 import {Stack} from "@mui/material";
 import {InstrumentButton, InstrumentName} from "./InstrumentSelector.styles";
 

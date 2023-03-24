@@ -9,7 +9,7 @@ import {
   INSTRUMENT_COLOR,
   NOTES
 } from "../../settings";
-import {Note} from "../Note";
+import {Note} from "./Note";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import {toast} from "react-toastify";

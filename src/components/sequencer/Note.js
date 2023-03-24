@@ -1,4 +1,4 @@
-import {NOTE_HT, NOTE_WD} from '../settings';
+import {NOTE_HT, NOTE_WD} from '../../settings';
 
 /**
  * It represents each square, respective of a note

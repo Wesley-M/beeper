@@ -1,10 +1,10 @@
 import {Box, Stack, styled} from "@mui/material";
-import {InstrumentSelector} from "../InstrumentSelector";
-import {SpeedSelector} from "../SpeedSelector";
-import {CustomButton} from "../CustomButton";
+import {InstrumentSelector} from "./InstrumentSelector";
+import {SpeedSelector} from "./SpeedSelector";
+import {CustomButton} from "../ui/CustomButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShareIcon from "@mui/icons-material/Share";
-import SharePanelDialog from "../SharePanelDialog";
+import SharePanelDialog from "../dialogs/SharePanelDialog";
 import React from "react";
 
 const ControlsContainer = styled(Stack)(({theme}) => ({

@@ -10,8 +10,8 @@ import TextField from '@mui/material/TextField';
 import { useQueryClient } from '@tanstack/react-query';
 import * as React from 'react';
 import { toast } from "react-toastify";
-import { api } from "../settings";
-import { CustomButton } from "./CustomButton";
+import { api } from "../../settings";
+import { CustomButton } from "../ui/CustomButton";
 
 export default function SharePanelDialog({ songURL, ...other }) {
   const [open, setOpen] = React.useState(false);
