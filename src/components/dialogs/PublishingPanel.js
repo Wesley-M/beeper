@@ -1,6 +1,4 @@
-import { Hearing } from "@mui/icons-material";
-import CloseIcon from "@mui/icons-material/Close";
-import {Grid, styled} from "@mui/material";
+import {Grid, Stack, styled} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -140,18 +138,33 @@ export default function PublishingPanel() {
               {(songsReq?.data || []).map(song => <SongCard song={song}/>)}
             </Grid>
             {songsReq?.data?.length === 0 &&
-                <Typography
+                <Stack direction="column"  alignItems="center">
+                  <Typography
                     sx={{
-                      fontSize: {xs: '2.5em', md: '3em', xl: '4em'},
+                      fontSize: {xs: '3.5em', md: '4em', xl: '5em'},
                       fontWeight: 'bold',
-                      opacity: 0.3,
                       textAlign: 'center',
-                      margin: '2em 1em'
+                      marginTop: '1em',
+                      color: '#FFFFFF40',
+                      flex: 1
                     }}
-                >
-                  Make the day of someone else better!
-                  Share a song today ♫
-                </Typography>
+                  >
+                    ಥ﹏ಥ
+                  </Typography>
+                  <Typography
+                      sx={{
+                        fontSize: {xs: '1.5em', md: '2.5em', xl: '3.5em'},
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        margin: '1em',
+                        color: '#FFFFFF40',
+                        flex: 4
+                      }}
+                  >
+                    It's all empty here! <br/>
+                    Share a song today ♫
+                  </Typography>
+                </Stack>
             }
           </Container>
         </Box>
